@@ -24,6 +24,22 @@ Queue *create_queue(int capacity) {
     return q;
 }
 
+void queue_destroy(Queue *q) {
+    free(q->data);
+    free(q);
+}
+
+void queue_enqueue(Queue *q, int value) {
+    if (q->size == q->capacity) {
+        // Queue is full, cannot enqueue
+        return;
+    }
+    
+    q->rear = (q->rear + 1) % q->capacity;  // Wrap around if necessary
+    q->data[q->rear] = value;               // Insert the new element
+    q->size++;                              // Increment the size
+}
+
 int queue_get_size(Queue *q) {
     return q->size;
 }
