@@ -40,6 +40,20 @@ void queue_enqueue(Queue *q, int value) {
     q->size++;                              // Increment the size
 }
 
+int queue_pop(Queue *q) {
+    if (q->size == 0) {
+        // Queue is empty, return an error value
+        return -1;  // Or another error value
+    }
+    
+    int value = q->data[q->front];
+    // Update the front pointer (wrap around if necessary)
+    q->front = (q->front + 1) % q->capacity;
+    // Decrease the size of the queue
+    q->size--;
+    return value;  // Return the dequeued element
+}
+
 int queue_get_size(Queue *q) {
     return q->size;
 }

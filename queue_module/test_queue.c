@@ -21,10 +21,16 @@ void test_queue_enqueue(void) {
     TEST_ASSERT_EQUAL_INT(0, queue_get_size(q));
 }
 
+void test_queue_dequeue(void) {
+    Queue *q = create_queue(5);
+    queue_enqueue(q, 12);
+    queue_pop(q);
+    TEST_ASSERT_EQUAL_INT(0, queue_get_size(q));
+}
 // Main function for Unity
 int main(void) {
     UNITY_BEGIN();
     // RUN_TEST(test_queue_create);
-    RUN_TEST(test_queue_enqueue);
+    RUN_TEST(test_queue_dequeue);
     return UNITY_END();
 }
