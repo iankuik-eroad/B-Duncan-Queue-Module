@@ -3,6 +3,9 @@
 
 typedef struct Queue Queue;
 
-Queue *queue_create(int capacity);
+Queue *create_queue(int capacity);
+
+// Helper Functions for testing
+int queue_get_size(Queue *q);
 
 #endif // QUEUE_H

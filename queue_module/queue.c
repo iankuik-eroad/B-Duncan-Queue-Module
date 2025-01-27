@@ -23,3 +23,7 @@ Queue *create_queue(int capacity) {
     q->size = 0;
     return q;
 }
+
+int queue_get_size(Queue *q) {
+    return q->size;
+}
