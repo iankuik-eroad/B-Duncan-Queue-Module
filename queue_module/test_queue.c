@@ -14,7 +14,11 @@ void test_queue_create(void) {
 void test_queue_enqueue(void) {
     Queue *q = create_queue(5);
     queue_enqueue(q, 12);
-    TEST_ASSERT_EQUAL(1, queue_get_size(q));
+    TEST_ASSERT_EQUAL_INT(1, queue_get_size(q));
+    queue_enqueue(q, 12);
+    TEST_ASSERT_EQUAL_INT(2, queue_get_size(q));
+    queue_destroy(q);
+    TEST_ASSERT_EQUAL_INT(0, queue_get_size(q));
 }
 
 // Main function for Unity
