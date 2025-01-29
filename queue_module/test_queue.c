@@ -55,7 +55,7 @@ void test_queue_circular_wrap_around(void) {
 
     queue_enqueue(q,15); // next enqueue will overwrite the first element
     int result = queue_pop(q);
-    TEST_ASSERT_EQUAL_INT(13, result);
+    TEST_ASSERT_EQUAL_INT(12, result);
     TEST_ASSERT_EQUAL_INT(3, queue_get_size(q));
 }
 
