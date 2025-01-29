@@ -11,6 +11,11 @@ void test_queue_create(void) {
     TEST_ASSERT_EQUAL(0, queue_get_size(q)); // ensure queue starts empty
 }
 
+void test_queue_create_zero_capacity(void) {
+    Queue *q = create_queue(0);  // Try creating a queue with zero capacity
+    TEST_ASSERT_NULL(q);  // The queue should be NULL (or handle it however you see fit)
+}
+
 void test_queue_enqueue(void) {
     Queue *q = create_queue(5);
     queue_enqueue(q, 12);
@@ -76,7 +81,14 @@ void test_queue_circular_wrap_around(void) {
 // Main function for Unity
 int main(void) {
     UNITY_BEGIN();
-    // RUN_TEST(test_queue_create);
-    RUN_TEST(test_queue_dequeue_extras);
+    UNITY_BEGIN();
+    RUN_TEST(test_queue_create);
+    RUN_TEST(test_queue_enqueue);
+    RUN_TEST(test_queue_dequeue);
+    RUN_TEST(test_queue_dequeue_empty);
+    RUN_TEST(test_queue_enqueue_full);
+    RUN_TEST(test_queue_circular_wrap_around);
+    RUN_TEST(test_queue_create_zero_capacity);
+    return UNITY_END();
     return UNITY_END();
 }
