@@ -29,15 +29,16 @@ void queue_destroy(Queue *q) {
     free(q);
 }
 
-void queue_enqueue(Queue *q, int value) {
+int queue_enqueue(Queue *q, int value) {
     if (q->size == q->capacity) {
         // Queue is full, cannot enqueue
-        return;
+        return -1;
     }
     
     q->rear = (q->rear + 1) % q->capacity;  // Wrap around if necessary
     q->data[q->rear] = value;               // Insert the new element
     q->size++;                              // Increment the size
+    return 1;
 }
 
 int queue_pop(Queue *q) {

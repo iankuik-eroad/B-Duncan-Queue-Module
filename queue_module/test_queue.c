@@ -37,6 +37,16 @@ void test_queue_dequeue_empty(void) {
     queue_destroy(q);
 }
 
+void test_queue_enqueue_full(void) {
+    Queue *q = create_queue(2);
+    queue_enqueue(q,12);
+    queue_enqueue(q,13); // Queue is full
+
+    int result = queue_enqueue(q,20);
+    TEST_ASSERT_EQUAL_INT(-1, result);
+
+}
+
 // Main function for Unity
 int main(void) {
     UNITY_BEGIN();
