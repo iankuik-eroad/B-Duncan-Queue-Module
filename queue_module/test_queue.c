@@ -47,10 +47,22 @@ void test_queue_enqueue_full(void) {
 
 }
 
+void test_queue_circular_wrap_around(void) {
+    Queue *q = create_queue(3);
+    queue_enqueue(q,12);
+    queue_enqueue(q,13);
+    queue_enqueue(q,14); // queue is full
+
+    queue_enqueue(q,15); // next enqueue will overwrite the first element
+    int result = queue_pop(q);
+    TEST_ASSERT_EQUAL_INT(13, result);
+    TEST_ASSERT_EQUAL_INT(3, queue_get_size(q));
+}
+
 // Main function for Unity
 int main(void) {
     UNITY_BEGIN();
     // RUN_TEST(test_queue_create);
-    RUN_TEST(test_queue_dequeue_empty);
+    RUN_TEST(test_queue_circular_wrap_around);
     return UNITY_END();
 }
