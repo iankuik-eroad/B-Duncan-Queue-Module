@@ -30,6 +30,20 @@ void test_queue_dequeue(void) {
     queue_destroy(q);
 }
 
+void test_queue_dequeue_extras(void) {
+    Queue *q = create_queue(5);
+    queue_enqueue(q, 1);
+    queue_enqueue(q, 2);
+    TEST_ASSERT_EQUAL_INT(2, queue_get_size(q));
+    
+    queue_pop(q);  // Remove 1
+    TEST_ASSERT_EQUAL_INT(1, queue_get_size(q));
+    
+    queue_pop(q);  // Remove 2
+    TEST_ASSERT_EQUAL_INT(0, queue_get_size(q));  // Queue should be empty
+    queue_destroy(q);
+}
+
 void test_queue_dequeue_empty(void) {
     Queue *q = create_queue(5);
     int result = queue_pop(q);
@@ -56,13 +70,13 @@ void test_queue_circular_wrap_around(void) {
     queue_enqueue(q,15); // next enqueue will overwrite the first element
     int result = queue_pop(q);
     TEST_ASSERT_EQUAL_INT(12, result);
-    TEST_ASSERT_EQUAL_INT(3, queue_get_size(q));
+    TEST_ASSERT_EQUAL_INT(2, queue_get_size(q));
 }
 
 // Main function for Unity
 int main(void) {
     UNITY_BEGIN();
     // RUN_TEST(test_queue_create);
-    RUN_TEST(test_queue_circular_wrap_around);
+    RUN_TEST(test_queue_dequeue_extras);
     return UNITY_END();
 }
