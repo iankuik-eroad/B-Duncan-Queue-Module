@@ -11,7 +11,7 @@ struct Queue {
 
 Queue *create_queue(int capacity) {
     Queue *q = (Queue *)malloc(sizeof(Queue)); // allocate memory
-    if (!q) return NULL;
+    if (!q || capacity == 0) return NULL;
     q->data = (int *)malloc(capacity * sizeof(int)); // allocate memory
     if (!q->data) {
         free(q); // free memory
